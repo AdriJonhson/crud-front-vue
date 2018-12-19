@@ -17,7 +17,7 @@
         </div>
 
         <div class="container">
-            <table class="highlight">
+            <table class="highlight responsive">
                 <thead>
                 <tr>
                     <th>Name</th>

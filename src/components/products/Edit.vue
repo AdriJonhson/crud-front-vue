@@ -81,7 +81,8 @@
         methods:{
             updateProduct(){
                 Products.update(this.$route.params.slug, this.product).then(response => {
-                    this.$router.push({ name: 'productsIndex' });
+                    M.toast({html: 'Dados atualizados com sucesso', classes: 'rounded'})
+                    // this.$router.push({ name: 'productsIndex' });
                 }).catch(e => {
                     console.log(e);
                 });

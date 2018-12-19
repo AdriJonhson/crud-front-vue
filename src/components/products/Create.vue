@@ -89,7 +89,8 @@
         methods: {
             saveProduct(){
                 Products.save(this.product).then(response => {
-                    this.$router.push({ name: 'productsIndex' });
+                    M.toast({html: 'Produto registrado com sucesso', classes: 'rounded'})
+                    // this.$router.push({ name: 'productsIndex' });
                 }).catch(error => {
                     this.errorsValidate.push(error.response.data);
                 });
