@@ -3,8 +3,12 @@
     <nav>
       <div class="nav-wrapper blue darken-1">
         <ul class="left hide-on-med-and-down">
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Produtos</a></li>
+          <li>
+              <router-link :to="{name: 'dashboard'}">Dashboard</router-link>
+          </li>
+          <li>
+              <router-link :to="{name: 'productsIndex'}">Produtos</router-link>
+          </li>
           <li><a href="#">Categorias</a></li>
         </ul>
       </div>
