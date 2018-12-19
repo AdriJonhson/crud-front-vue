@@ -35,7 +35,12 @@
                     <td>{{ product.category }}</td>
                     <td>R$ {{ product.price | moneyFormat}}</td>
                     <td>{{ product.quantity }}</td>
-                    <td><a class="waves-effect btn-small blue darken-1"><i class="material-icons">create</i></a></td>
+                    <td>
+                        <!--<a class="waves-effect btn-small blue darken-1"><i class="material-icons">create</i></a>-->
+                        <router-link :to="{name: 'productsEdit', params: {slug: product.slug}}" class="waves-effect btn-small blue darken-1">
+                            <i class="material-icons left">create</i>
+                        </router-link>
+                    </td>
                     <td><a class="waves-effect btn-small red darken-1"><i class="material-icons left">delete_sweep</i></a></td>
                 </tr>
                 </tbody>

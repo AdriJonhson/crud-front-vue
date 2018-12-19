@@ -59,7 +59,6 @@
 
 <script>
     /* eslint-disable */
-    import { required, minLength, between } from 'vuelidate/lib/validators'
     import Products from '../../services/products';
     import Categories from '../../services/categories';
 

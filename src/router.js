@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Dashboard from '@/components/Dashboard';
 import Products from '@/components/products/Product';
 import ProductCreate from '@/components/products/Create';
+import ProductEdit from '@/components/products/Edit';
 
 Vue.use(Router);
 
@@ -23,6 +24,11 @@ export default new Router({
             path: '/products/create',
             name: 'productsCreate',
             component: ProductCreate
+        },
+        {
+            path: '/products/:slug/edit',
+            name: 'productsEdit',
+            component: ProductEdit
         },
     ],
 })

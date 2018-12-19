@@ -7,8 +7,16 @@ export default {
     },
 
     /* eslint-disable */
-    save:(product)=> {
+    save:(product)  => {
         return http.post('products/store', product)
+    },
+
+    edit:(slug) => {
+        return http.get('products/' + slug)
+    },
+
+    update:(slug, product) => {
+        return http.put('products/'+slug+'/edit', product)
     }
 
 }
