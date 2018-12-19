@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col s12">
                         <select id="category" class="browser-default" v-model="product.category_id">
-                            <option value="" disabled selected>Selecione a categoria</option>
+                            <option value="">Selecione a categoria</option>
                             <option
                                     v-for="category of categories"
                                     :key="category.id"
