@@ -17,6 +17,10 @@ export default {
 
     update:(slug, product) => {
         return http.put('products/'+slug+'/edit', product)
+    },
+
+    delete:(slug)  => {
+        return http.delete('products/'+slug+'/delete')
     }
 
 }
