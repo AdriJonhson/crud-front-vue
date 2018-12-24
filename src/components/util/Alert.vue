@@ -6,16 +6,19 @@
 <script>
     /* eslint-disable */
     export default {
-        props: ['message'],
-
         name: 'Alert',
 
         created(){
-            if(this.message.text != ''){
-                M.toast({html: this.message.text, classes: 'rounded'});
+            if(this.store.message != ''){
+                M.toast({html: this.store.message, classes: 'rounded'});
             }
-            this.message.text = '';
         },
+
+        data(){
+            return{
+                store: this.$store.state,
+            }
+        }
 
     }
 </script>

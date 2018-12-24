@@ -16,13 +16,13 @@
     </nav>
 
     <router-view></router-view>
-  </div>
 
+  </div>
 </template>
 
 <script>
     export default{
-        name: 'App'
+        name: 'App',
     }
 </script>
 

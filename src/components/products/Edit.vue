@@ -88,12 +88,16 @@
             updateProduct(){
                 Products.update(this.$route.params.slug, this.product).then(response => {
                     this.message.text = "Dados atualizados com sucesso";
-                    this.$router.push({ name: 'productsIndex' , params: {message: this.message} });
+                    this.$store.commit('setMessage', this.message);
+
+                    this.$router.push({ name: 'productsIndex'});
                 }).catch(e => {
                     console.log(e);
 
                     this.message.text = "Erro ao atualizar o produto";
-                    this.$router.push({ name: 'productsIndex' , params: {message: this.message} });
+                    this.$store.commit('setMessage', this.message);
+
+                    this.$router.push({ name: 'productsIndex'});
                 });
             }
         }

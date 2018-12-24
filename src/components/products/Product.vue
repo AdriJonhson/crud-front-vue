@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <alert v-bind:message="message"></alert>
+        <alert></alert>
         <div class="container">
             <h4>Produtos</h4>
             <div class="preloader-wrapper big active loader" v-if="loadData">
