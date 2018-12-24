@@ -1,6 +1,7 @@
 <template>
   <div>
     <nav>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <div class="nav-wrapper blue darken-1">
         <ul class="left hide-on-med-and-down">
           <li>

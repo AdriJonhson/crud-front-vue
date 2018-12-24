@@ -1,6 +1,7 @@
 <template>
 
     <div>
+        <alert v-bind:message="message"></alert>
         <div class="container">
             <h4>Produtos</h4>
             <div class="preloader-wrapper big active loader" v-if="loadData">
@@ -57,26 +58,29 @@
                 </tfoot>
             </table>
         </div>
-
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-        </div>
+        <!--<div id="modal1" class="modal">-->
+            <!--<div class="modal-content">-->
+                <!--<h4>Modal Header</h4>-->
+                <!--<p>A bunch of text</p>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </template>
 
 <script>
     /* eslint-disable */
     import Products from '../../services/products';
+    import alert from '../util/Alert';
 
     export default {
+        props: ['message'],
 
         name: 'ProductsIndex',
+
+        components: {alert},
 
         mounted(){
             this.loader.loadProducts = true;
@@ -85,10 +89,6 @@
             }).finally(() => {
                 this.loader.loadProducts = false;
             });
-        },
-
-        created(){
-            console.log($('.modal').modal());
         },
 
         computed: {

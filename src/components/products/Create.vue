@@ -81,6 +81,11 @@
                     category_id: '',
                 },
 
+                message: {
+                    success: false,
+                    text: ''
+                },
+
                 categories: [],
                 errorsValidate: [],
             }
@@ -89,10 +94,16 @@
         methods: {
             saveProduct(){
                 Products.save(this.product).then(response => {
-                    M.toast({html: 'Produto registrado com sucesso', classes: 'rounded'})
-                    // this.$router.push({ name: 'productsIndex' });
+                    //M.toast({html: 'Produto registrado com sucesso', classes: 'rounded'})
+                    this.message.text = "Produto registrado com sucesso";
+
+                    this.$router.push({ name: 'productsIndex', params: {message: this.message} });
                 }).catch(error => {
+                    //armazena os erros
                     this.errorsValidate.push(error.response.data);
+
+                    this.message.text = "Erro ao registrar o produto";
+                    this.$router.push({ name: 'productsIndex', params: {message: this.message} });
                 });
                 // console.log(this.errorsValidate.data);
             },

@@ -75,16 +75,25 @@
 
                 categories: [],
                 errorsValidate: [],
+
+                message: {
+                    success: false,
+                    text: ''
+                },
+
             }
         },
 
         methods:{
             updateProduct(){
                 Products.update(this.$route.params.slug, this.product).then(response => {
-                    M.toast({html: 'Dados atualizados com sucesso', classes: 'rounded'})
-                    // this.$router.push({ name: 'productsIndex' });
+                    this.message.text = "Dados atualizados com sucesso";
+                    this.$router.push({ name: 'productsIndex' , params: {message: this.message} });
                 }).catch(e => {
                     console.log(e);
+
+                    this.message.text = "Erro ao atualizar o produto";
+                    this.$router.push({ name: 'productsIndex' , params: {message: this.message} });
                 });
             }
         }

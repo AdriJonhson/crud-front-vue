@@ -18,7 +18,8 @@ export default new Router({
         {
             path: '/products',
             name: 'productsIndex',
-            component: Products
+            component: Products,
+            props: true
         },
         {
             path: '/products/create',
