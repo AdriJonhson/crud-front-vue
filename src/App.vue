@@ -14,6 +14,8 @@
       </div>
     </nav>
 
+    <vue-snotify></vue-snotify>
+
     <router-view></router-view>
   </div>
 
@@ -26,4 +28,5 @@
 </script>
 
 <style>
+  @import "~vue-snotify/styles/material.css";
 </style>

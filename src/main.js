@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-require("expose-loader?$!jquery");
+import Snotify from 'vue-snotify'
+
+require("expose-loader?$!jquery")
+
+Vue.use(Snotify, {toast: {showProgressBar: false}})
 
 Vue.config.productionTip = false
 

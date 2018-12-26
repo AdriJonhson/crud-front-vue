@@ -88,7 +88,7 @@
         },
 
         created(){
-            console.log($('.modal').modal());
+            //console.log($('.modal').modal());
         },
 
         computed: {
