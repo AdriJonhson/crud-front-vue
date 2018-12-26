@@ -31,4 +31,6 @@
 
 <style>
   @import "~vue-snotify/styles/material.css";
+  @import "~vodal/common.css";
+  @import "~vodal/rotate.css";
 </style>

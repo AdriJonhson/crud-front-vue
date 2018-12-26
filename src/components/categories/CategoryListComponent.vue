@@ -30,9 +30,9 @@
                     <tr v-for="category of categories" :key="category.id">
                         <td>{{ category.title }}</td>
                         <td>
-                            <router-link :to="{name: 'productsEdit', params: {slug: category.slug}}" class="waves-effect btn-small blue darken-1">
+                            <a  href="#modal1" class="waves-effect btn-small blue darken-1">
                                 <i class="material-icons left">create</i>
-                            </router-link>
+                            </a>
                         </td>
                         <td>
                             <a class="waves-effect btn-small red darken-1 modal-trigger" href="#modal1"><i class="material-icons left">delete_sweep</i></a>
@@ -43,30 +43,38 @@
                 <tfoot>
                 <tr>
                     <td colspan="6">
-                        <router-link :to="{name: 'productsCreate'}" class="waves-effect btn-small blue darken-1">
+                        <a  class="waves-effect btn-small blue darken-1" @click.prevent="create()">
                             <i class="material-icons left">add</i>
                             Cadastrar Categoria
-                        </router-link>
+                        </a>
                     </td>
                 </tr>
                 </tfoot>
             </table>
+
+            <vodal :show="showModal" animation="rotate" @hide="hide" :height="200">
+                <div>
+                    <form-category></form-category>
+                </div>
+            </vodal>
         </div>
     </div>
 </template>
 
 <script>
     import Categories from '../../services/categories'
+    import FormCategory from './FormCategoryComponent'
 
     export default {
         name: 'CategoryListComponent',
-
+        components: {FormCategory},
         data(){
             return {
                 categories: [],
                 loader: {
                     loadProducts: false
-                }
+                },
+                showModal: false
             }
         },
 
@@ -84,6 +92,16 @@
             }).finally(() => {
                 this.loader.loadProducts = false;
             });
+        },
+
+        methods: {
+            create(){
+                this.showModal = true;
+            },
+
+            hide(){
+                this.showModal = false;
+            }
         }
     }
 </script>
