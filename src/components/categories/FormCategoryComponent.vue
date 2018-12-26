@@ -1,9 +1,9 @@
 <template>
     <div>
-        <form>
+        <form @submit.prevent="onSubmit">
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="name" type="text" class="validate">
+                    <input id="name" type="text" class="validate" v-model="category.title">
                     <label for="name">Título</label>
                 </div>
             </div>
@@ -15,6 +15,9 @@
 </template>
 
 <script>
+    /* eslint-disable */
+    import Category from '../../services/categories'
+
     export default {
         name: 'form-category',
         props: {
@@ -31,6 +34,21 @@
                         title: '',
                         slug: ''
                     }
+                }
+            }
+        },
+
+        methods: {
+            onSubmit() {
+                const action =  this.update ? 'update' : 'create';
+
+                if(action == 'create'){
+                    Category.save(this.category).then(response => {
+                        this.$snotify.success('Dados atualizados com sucesso', 'OK')
+                        this.$router.push({name: 'categoriesIndex'})
+                    }).catch(error => {
+                        console.log(error)
+                    })
                 }
             }
         }

@@ -52,7 +52,7 @@
                 </tfoot>
             </table>
 
-            <vodal :show="showModal" animation="rotate" @hide="hide" :height="200">
+            <vodal :show="showModal" animation="rotate" @hide="hide" @success="success" :height="200">
                 <div>
                     <form-category></form-category>
                 </div>
@@ -101,6 +101,10 @@
 
             hide(){
                 this.showModal = false;
+            },
+
+            success(){
+                this.hide();
             }
         }
     }
