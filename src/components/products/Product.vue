@@ -18,7 +18,7 @@
         </div>
 
         <div class="container">
-            <table class="highlight responsive">
+            <table class="highlight responsive" v-if="!loadData">
                 <thead>
                 <tr>
                     <th>Name</th>
