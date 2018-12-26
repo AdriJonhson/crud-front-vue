@@ -87,10 +87,10 @@
         methods:{
             updateProduct(){
                 Products.update(this.$route.params.slug, this.product).then(response => {
-                    this.message.text = "Dados atualizados com sucesso";
-                    this.$store.commit('setMessage', this.message);
+                    // M.toast({html: 'Dados atualizados com sucesso', classes: 'rounded'})
+                    this.$snotify.success('Dados atualizados com sucesso', 'OK')
+                    this.$router.push({ name: 'productsIndex' });
 
-                    this.$router.push({ name: 'productsIndex'});
                 }).catch(e => {
                     console.log(e);
 

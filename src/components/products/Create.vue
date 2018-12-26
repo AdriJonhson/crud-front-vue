@@ -94,11 +94,9 @@
         methods: {
             saveProduct(){
                 Products.save(this.product).then(response => {
-                    //M.toast({html: 'Produto registrado com sucesso', classes: 'rounded'})
-                    this.message.text = "Produto registrado com sucesso";
-                    this.$store.commit('setMessage', this.message);
-
-                    this.$router.push({ name: 'productsIndex'});
+                    // M.toast({html: 'Produto registrado com sucesso', classes: 'rounded'})
+                    this.$snotify.success('Produto registrado com sucesso', 'OK')
+                    this.$router.push({ name: 'productsIndex' });
                 }).catch(error => {
                     //armazena os erros
                     this.errorsValidate.push(error.response.data);

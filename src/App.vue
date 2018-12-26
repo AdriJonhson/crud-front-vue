@@ -10,10 +10,14 @@
           <li>
               <router-link :to="{name: 'productsIndex'}">Produtos</router-link>
           </li>
-          <li><a href="#">Categorias</a></li>
+          <li>
+              <router-link :to="{name: 'categoriesIndex'}">Categorias</router-link>
+          </li>
         </ul>
       </div>
     </nav>
+
+    <vue-snotify></vue-snotify>
 
     <router-view></router-view>
 
@@ -29,4 +33,7 @@
 </script>
 
 <style>
+  @import "~vue-snotify/styles/material.css";
+  @import "~vodal/common.css";
+  @import "~vodal/rotate.css";
 </style>

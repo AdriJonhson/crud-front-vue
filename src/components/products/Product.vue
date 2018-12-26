@@ -21,7 +21,7 @@
             <table class="highlight responsive" v-if="!loadData">
                 <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Nome</th>
                     <th>Categoria</th>
                     <th>Preço</th>
                     <th>Quantidade</th>
@@ -89,6 +89,10 @@
             }).finally(() => {
                 this.loader.loadProducts = false;
             });
+        },
+
+        created(){
+            //console.log($('.modal').modal());
         },
 
         computed: {
