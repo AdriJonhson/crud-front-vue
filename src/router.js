@@ -4,6 +4,7 @@ import Dashboard from '@/components/Dashboard';
 import Products from '@/components/products/Product';
 import ProductCreate from '@/components/products/Create';
 import ProductEdit from '@/components/products/Edit';
+import Categories from '@/components/categories/CategoryListComponent';
 
 Vue.use(Router);
 
@@ -30,5 +31,10 @@ export default new Router({
             name: 'productsEdit',
             component: ProductEdit
         },
+        {
+            path: '/categories',
+            name: 'categoriesIndex',
+            component: Categories
+        }
     ],
 })

@@ -20,7 +20,7 @@
             <table class="highlight responsive">
                 <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Nome</th>
                     <th>Categoria</th>
                     <th>Preço</th>
                     <th>Quantidade</th>

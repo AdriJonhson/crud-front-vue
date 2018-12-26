@@ -9,7 +9,9 @@
           <li>
               <router-link :to="{name: 'productsIndex'}">Produtos</router-link>
           </li>
-          <li><a href="#">Categorias</a></li>
+          <li>
+              <router-link :to="{name: 'categoriesIndex'}">Categorias</router-link>
+          </li>
         </ul>
       </div>
     </nav>
