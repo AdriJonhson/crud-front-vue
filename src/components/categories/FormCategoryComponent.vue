@@ -44,11 +44,14 @@
 
                 if(action == 'create'){
                     Category.save(this.category).then(response => {
-                        this.$snotify.success('Dados atualizados com sucesso', 'OK')
+                        this.$emit('success')
+                        this.$snotify.success('Categoria registrada com sucesso', 'OK')
                         this.$router.push({name: 'categoriesIndex'})
                     }).catch(error => {
-                        console.log(error)
+                        this.$snotify.error('Algo deu errado...')
                     })
+                }else{
+
                 }
             }
         }

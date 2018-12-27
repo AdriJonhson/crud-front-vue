@@ -19,23 +19,23 @@
         <div class="container" v-if="!loadData">
             <table class="highlight responsive">
                 <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Editar</th>
-                    <th>Excluir</th>
-                </tr>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                    </tr>
                 </thead>
 
                 <tbody>
                     <tr v-for="category of categories" :key="category.id">
                         <td>{{ category.title }}</td>
                         <td>
-                            <a  href="#modal1" class="waves-effect btn-small blue darken-1">
+                            <a class="waves-effect btn-small blue darken-1" @click.prevent="edit(category.slug)">
                                 <i class="material-icons left">create</i>
                             </a>
                         </td>
                         <td>
-                            <a class="waves-effect btn-small red darken-1 modal-trigger" href="#modal1"><i class="material-icons left">delete_sweep</i></a>
+                            <a class="waves-effect btn-small red darken-1 modal-trigger" @click.prevent="confirmDelete(category.title, category.slug)"><i class="material-icons left">delete_sweep</i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -52,9 +52,9 @@
                 </tfoot>
             </table>
 
-            <vodal :show="showModal" animation="rotate" @hide="hide" @success="success" :height="200">
+            <vodal :show="showModal" animation="zoom" @hide="hide" :height="200">
                 <div>
-                    <form-category></form-category>
+                    <form-category :update="update" :category="category" @success="success"></form-category>
                 </div>
             </vodal>
         </div>
@@ -74,13 +74,17 @@
                 loader: {
                     loadProducts: false
                 },
-                showModal: false
+                showModal: false,
+                update: false,
+                category: {
+                    slug: ''
+                }
             }
         },
 
         computed: {
             loadData(){
-                return this.loader.loadProducts;
+                return this.loader.loadProducts
             }
         },
 
@@ -88,23 +92,63 @@
             /* eslint-disable */
             this.loader.loadProducts = true;
             Categories.list().then(response => {
-                this.categories = response.data.categories;
+                this.categories = response.data.categories
             }).finally(() => {
-                this.loader.loadProducts = false;
+                this.loader.loadProducts = false
             });
         },
 
         methods: {
             create(){
-                this.showModal = true;
+                this.showModal = true
             },
 
             hide(){
-                this.showModal = false;
+                this.showModal = false
             },
 
             success(){
-                this.hide();
+                this.hide()
+            },
+
+            edit(slug){
+                this.update = true;
+                this.category.slug = slug
+                this.showModal = true;
+            },
+
+            confirmDelete(categoryName, categorySlug){
+                // this.$snotify.error(`Deseja realmente deletar a categoria: ${categoryName}`, {
+                //     timeout: 10000,
+                //     showProgressBar: true,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     buttons: [
+                //         {text: 'Não', action: () => console.log('Clicked: No')},
+                //         {text: 'Sim', action: () => this.destroy(categorySlug), bold: false},
+                //     ]
+                // })
+
+                this.$snotify.error(`Deseja realmente deletar o produto: ${categoryName}`, categoryName, {
+                    timeout: 10000,
+                    showProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    buttons: [
+                        {text: 'Não', action: () => console.log('Clicked: No')},
+                        {text: 'Sim', action: () => this.destroy(), bold: false},
+                    ]
+                })
+            },
+
+            destroy(slug){
+                Categories.destroy(slug).then(response => {
+                    this.$snotify.success('Categoria removida com sucesso', 'OK')
+                    // this.$router.push({name: 'categoriesIndex'})
+                }).catch(error => {
+                    this.$snotify.error('Algo deu errado...')
+                    this.$router.push({name: 'categoriesIndex'})
+                });
             }
         }
     }
