@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <alert></alert>
+        
         <div class="container">
             <h4>Produtos</h4>
             <div class="preloader-wrapper big active loader" v-if="loadData">
@@ -31,19 +31,19 @@
                 </thead>
 
                 <tbody>
-                <tr v-for="product of products" :key="product.id">
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.category }}</td>
-                    <td>R$ {{ product.price | moneyFormat}}</td>
-                    <td>{{ product.quantity }}</td>
-                    <td>
-                        <!--<a class="waves-effect btn-small blue darken-1"><i class="material-icons">create</i></a>-->
-                        <router-link :to="{name: 'productsEdit', params: {slug: product.slug}}" class="waves-effect btn-small blue darken-1">
-                            <i class="material-icons left">create</i>
-                        </router-link>
-                    </td>
-                    <td><a class="waves-effect btn-small red darken-1 modal-trigger" href="#modal1"><i class="material-icons left">delete_sweep</i></a></td>
-                </tr>
+                    <tr v-for="product of products" :key="product.id">
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.category }}</td>
+                        <td>R$ {{ product.price | moneyFormat }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>
+                            <!--<a class="waves-effect btn-small blue darken-1"><i class="material-icons">create</i></a>-->
+                            <router-link :to="{name: 'productsEdit', params: {slug: product.slug}}" class="waves-effect btn-small blue darken-1">
+                                <i class="material-icons left">create</i>
+                            </router-link>
+                        </td>
+                        <td><a class="waves-effect btn-small red darken-1 modal-trigger" @click.prevent="confirmDelete(product)"><i class="material-icons left">delete_sweep</i></a></td>
+                    </tr>
                 </tbody>
 
                 <tfoot>
@@ -58,15 +58,6 @@
                 </tfoot>
             </table>
         </div>
-        <!--<div id="modal1" class="modal">-->
-            <!--<div class="modal-content">-->
-                <!--<h4>Modal Header</h4>-->
-                <!--<p>A bunch of text</p>-->
-            <!--</div>-->
-            <!--<div class="modal-footer">-->
-                <!--<a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>-->
-            <!--</div>-->
-        <!--</div>-->
     </div>
 </template>
 
@@ -82,38 +73,64 @@
 
         components: {alert},
 
-        mounted(){
-            this.loader.loadProducts = true;
-            Products.list().then(response => {
-                this.products = response.data.products;
-            }).finally(() => {
-                this.loader.loadProducts = false;
-            });
-        },
-
         created(){
-            //console.log($('.modal').modal());
-        },
-
-        computed: {
-            loadData(){
-                return this.loader.loadProducts;
-            }
+            // this.loader.loadProducts = true;
+            // Products.list().then(response => {
+            //     this.products = response.data.products;
+            // }).finally(() => {
+            //     this.loader.loadProducts = false;
+            // });
+            this.loadProducts();
         },
 
         data(){
             return {
-                products: [],
+                // products: [],
                 loader: {
                     loadProducts: false
                 }
             }
         },
 
+        computed: {
+            loadData(){
+                return this.loader.loadProducts
+            },
+
+            products(){
+                return this.$store.state.products.items
+            }
+        },
+
+        methods: {
+            loadProducts(){
+                this.$store.dispatch('loadProducts')
+            },
+
+            confirmDelete(product){
+                this.$snotify.error(`Deseja realmente deletar o produto: ${product.name}`, product.name, {
+                    timeout: 10000,
+                    showProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    buttons: [
+                        {text: 'Não', action: () => console.log('Clicked: No')},
+                        {text: 'Sim', action: () => this.destroy(product), bold: false},
+                    ]
+                })
+            },
+
+            destroy(product){
+                this.$store.dispatch('destroyProduct', product).then(() => {
+                    this.loadProducts()
+                })
+            }
+        },
+
         filters: {
             moneyFormat: function(value){
-                let val = (value/1).toFixed(2).replace('.', ',');
-                return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                let val = (value/1).toFixed(2).replace('.', ',')
+                return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
             }
         }
 
